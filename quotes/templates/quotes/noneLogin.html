@@ -1,0 +1,61 @@
+{% extends 'quotes/index.html' %}
+{% block content %}
+<body class="NoneHomePage">
+    <header class="head">
+    <h1 class="text-center">Yqoute</h1>
+</header>
+
+	
+
+
+   
+
+
+<div class="container d-flex justify-content-center">
+   
+   
+    <div class="NewUser ">
+        <h3 class="text-center bg-dark text-light p-2 rounded-pill shadow-lg">Come on 🐱‍👤</h3>
+        <a id="login" href="{% url 'login' %} " class="btn btn-success btn-lg m-2">Login</a>
+        <a href=" {% url 'register' %}" class="btn btn-success btn-lg m-2">Register</a>
+    </div>
+
+   
+
+
+
+
+</div>
+
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer class="mt-5 footerNonLogin">
+    <div class=" d-flex justify-content-center ">
+        <p class="text-center  "  style="color: #fff;">Developed by -    
+        <a href="https://www.twitter.com/@hadytaha77" style="color: #fff;" target="_blank">
+            <i class="fab fa-twitter "></i>
+             @hadytaha77
+        </a>
+        </p>
+        
+    </div>
+</footer>
+ 	
+
+</body>
+{% endblock content %}

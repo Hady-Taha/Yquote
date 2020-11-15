@@ -1,0 +1,161 @@
+{% extends 'quotes/index.html' %}
+{% load static %}
+{% block content %}
+<body class="MineBackground">
+
+	
+<!---------header----------->
+	
+<header class="head ">
+       
+  <nav class="navbar navbar-expand-lg head-nav">
+   
+    <h4><a href="#" class="nav-link p-0">Yquote</a></h4>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="fas fa-bars " style="color: #fff;"></span>
+    </button>
+      
+      <div class="collapse navbar-collapse justify-content-between " id="navbarNavDropdown">
+          
+
+          <ul class="navbar-nav ml-auto">
+            
+            
+
+
+
+              <li class="nav-item dropdown  ">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Username
+                  </a>
+                  <div class="dropdown-menu head-dropdown-register " aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">
+                    <img src="image/test.jpg" class="rounded-circle" width="20" height="20">
+                    Profile
+                    </a>
+                    <a class="dropdown-item" href="#">
+                    <i class="fas fa-sign-out-alt" style="font-size: 20px"></i>
+                    Logout
+                    </a>
+                  </div>
+              </li>
+
+
+              <li class="nav-item active">
+                  <a class="nav-link" href="#">Home</a>
+              </li>            
+
+          </ul>
+      
+
+
+  
+      
+
+      </div>
+  
+
+  </nav>
+
+
+</header>
+<!---------header----------->
+
+
+
+<div class="container ">
+    <div class="row " >
+        <div class="col-md-4">
+            <div class="info d-flex flex-column align-items-center">
+            <img src="image/test.jpg" class="rounded-circle  " width="100" height="100">
+            <h3>username</h3>
+            <small>14/11/2020</small>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="qoute-info ">
+                 <p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley  
+                </p>
+            
+                <div class="form-for-sttaing-post">
+                     <form method="POST">
+                     <button class="btn btn-sm btn-danger"> Delete</button>
+                      </form>
+                </div>
+            </div>
+            <h1 class="text-center m-3"> --<span style="color: orange;">C</span>omments--</h1>
+            <div class="comments">
+                
+                <div class=" form-for-add-comment  mb-3">
+                    <div class=" d-flex flex-row justify-content-center ">
+                   <img src="image/test.jpg" width="50" height="50" class="rounded-circle m-2">
+                    <form method="POST" class="w-100 mt-3">
+                      <input type="text" class="form-control rounded-pill " placeholder="Your Comment...✍">
+                      <button class="btn rounded-pill btn-success mt-2 float-right "> 
+                        comment
+                        <i class="far fa-paper-plane"></i>
+                      </button>
+                    </form>
+
+                    
+                    </div>
+                </div>
+               
+                <div class="comment mt-2">
+                <h6>
+                    <img src="image/test.jpg" class="rounded-circle" width="40" height="40">
+                    username
+                </h6>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing 
+                </p>
+
+                <form method="POST">
+                    <button class="btn  btn-sm rounded-pill btn-danger mt-2 "> 
+                      Delete
+                    </button>
+                </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+  
+
+{% endblock content %}

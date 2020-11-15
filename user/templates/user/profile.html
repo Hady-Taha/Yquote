@@ -1,0 +1,226 @@
+{% extends 'quotes/index.html' %}
+{% block content %}
+{% load static %}
+<body class="MineBackground">
+
+<!---------header----------->
+	
+<header class="head ">
+       
+    <nav class="navbar navbar-expand-lg head-nav">
+     
+      <h4><a href="{% url 'website' %}" class="nav-link p-0">Yquote</a></h4>
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="fas fa-bars " style="color: #fff;"></span>
+      </button>
+        
+        <div class="collapse navbar-collapse justify-content-between " id="navbarNavDropdown">
+            
+  
+            <ul class="navbar-nav ml-auto">
+              
+              
+  
+  
+  
+                <li class="nav-item dropdown  ">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{user.username}}
+                      
+                      
+          
+                        
+                      {% if profile.verify == True %}
+                      <img src="{% static 'quotes/image/verf.png' %} " width="25" height="25">
+                      {% endif %}
+                    </a>
+                    <div class="dropdown-menu head-dropdown-register " aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="{% url 'profile' user.id %}">
+                        <img src=" {{user.profile.profile_img.url}}" class="rounded-circle" width="20" height="20">
+                        {{user.username}}
+                       
+                      {% if profile.verify == True %}
+                      <img src="{% static 'quotes/image/verf.png' %} " width="25" height="25">
+                      {% endif %}
+                      </a>
+                      <a class="dropdown-item" href="{% url 'logout' %}">
+                      <i class="fas fa-sign-out-alt" style="font-size: 20px"></i>
+                      Logout
+                      </a>
+                    </div>
+                </li>
+  
+  
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                  </li>
+  
+  
+              
+  
+           
+              
+  
+            </ul>
+        
+  
+  
+    
+        
+  
+        </div>
+    
+  
+    </nav>
+  
+  
+  </header>
+  <!---------header----------->
+
+
+  <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+              {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-{{message.tags}} d-flex justify-content-center" role="alert">
+            {{message}}
+          </div>
+          {% endfor %}
+          {% endif %}
+                <div class="porfile d-flex flex-column align-items-center ">
+                    <img src="{{profile.profile_img.url}}" class="rounded-circle imag-profile" height="200" width="200">
+                    
+                    {% if profile.profile_user.first_name %}
+                    <h3 class="text-center">{{ profile.profile_user.first_name}}</h3>
+                    <h6 class="text-center">
+                      {{profile.profile_user.username}}
+                      {% if profile.verify == True %}
+                      <img src="{% static 'quotes/image/verf.png' %} " width="25" height="25">
+                      {% endif %}
+                    </h6>
+                    
+                    {% else %}
+                    <h3 class="text-center">
+                      
+                      {{profile.profile_user.username}}
+                      {% if profile.verify == True %}
+                      <img src="{% static 'quotes/image/verf.png' %} " width="25" height="25">
+                      {% endif %}
+                    </h3>
+                    
+                    {% endif %}
+                    
+                   
+                    <p class="text-center">
+                      {{profile.bio}}
+                    </p>
+                    {% if profile.profile_user.username == user.username%}
+                    <a href="{%url 'updateprofile' user.id %}" class="btn btn-secondary">edit profile</a>
+                   {% endif %}
+                    
+                </div>
+            </div>
+        
+            <div class="col-md-6">
+                
+               
+                
+                
+                
+              
+                <div class="Quotes-in-profile">
+                  
+                    <h4 class="text-center">Quotes</h4>
+                    {% if profile.profile_user.username == user.username%}
+                    <div class=" form-for-add-post  mb-3">
+                        <div class=" d-flex flex-row justify-content-center ">
+                       <img src="{{profile.profile_img.url}}" width="50" height="50" class="rounded-circle m-2">
+                        <form method="POST" class="w-100 mt-3" >
+                          {% csrf_token %}
+                          {{form.qoute}}
+                          <button class="btn rounded-pill btn-success mt-2 float-right "> 
+                            Post
+                            <i class="far fa-paper-plane"></i>
+                          </button>
+                        </form>
+                        </div>
+                    </div>
+                  {%endif%}
+
+                    
+                    {% if quots %}
+                    
+                    {% for quot in quots %}
+                
+                   
+                    <div class="Quotes-profile ">
+                      <h6>
+                        <img src="{{quot.userp.profile_img.url}}" class="rounded-circle  " width="30" height="30">  
+                        {{quot.userp.profile_user.username}}
+                        {% if quot.userp.verify == True %}
+                        <img src="{% static 'quotes/image/verf.png' %} " width="20" height="20">
+                        {% endif %}
+                        </h6>
+                        <p>{{quot.qoute}}</p>
+                        {% if quot.userp.profile_user.username == user.username%}
+                        <div class="form-for-sttaing-post" >
+                            <form method="POST" action="{% url 'delete' quot.id %}">
+                              {% csrf_token %}
+                            <button class="btn btn-sm btn-danger"> Delete</button>
+                            </form>
+                        </div>
+                        {% endif%}
+                    </div>
+                    {% endfor %}
+                      
+                   
+                    
+                    {% else %}
+                    <div class="Quotes-profile ">
+                        <h4>No quotes yet 😢</h4>
+                      
+                    </div>
+                    {% endif %}
+                    {% if profile.profile_user.username == 'hady' %}
+                    <small class="text-center">Developed by Hady taha</small>
+                   {% endif %}
+                
+                
+                  </div>
+                
+            </div>
+        
+        </div>
+        
+        
+    
+    </div>
+  
+
+
+    
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 	
+
+</body>
+{% endblock content %}

@@ -1,0 +1,167 @@
+{% extends 'quotes/index.html' %}
+{% block content %}
+<body class="MineBackground">
+
+<!---------header----------->
+	
+<header class="head ">
+       
+    <nav class="navbar navbar-expand-lg head-nav">
+     
+      <h4><a href="#" class="nav-link p-0">Yquote</a></h4>
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="fas fa-bars " style="color: #fff;"></span>
+      </button>
+        
+        <div class="collapse navbar-collapse justify-content-between " id="navbarNavDropdown">
+            
+  
+            <ul class="navbar-nav ml-auto">
+              
+              
+  
+  
+  
+                <li class="nav-item dropdown  ">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{user.username}}
+                    </a>
+                    <div class="dropdown-menu head-dropdown-register " aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="{% url 'profile' user.id %}">
+                        <img src=" {{user.profile.profile_img.url}}" class="rounded-circle" width="20" height="20">
+                        {{user.username}}
+                      </a>
+                      <a class="dropdown-item" href="{% url 'logout' %}">
+                      <i class="fas fa-sign-out-alt" style="font-size: 20px"></i>
+                      Logout
+                      </a>
+                    </div>
+                </li>
+  
+  
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %} ">Home</a>
+                  </li>
+                  
+                  
+  
+              
+  
+  
+           
+              
+  
+            </ul>
+        
+  
+  
+    
+        
+  
+        </div>
+    
+  
+    </nav>
+  
+  
+  </header>
+  <!---------header----------->
+
+
+  <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="porfile d-flex flex-column align-items-center ">
+                    <img src="{{profile.profile_img.url}}" class="rounded-circle imag-profile" height="200" width="200">
+                    
+                    {% if profile.profile_user.first_name %}
+                    <h3 class="text-center">{{ profile.profile_user.first_name}}</h3>
+                    <h6 class="text-center">{{profile.profile_user.username}}</h6>
+                    {% else %}
+                    <h3 class="text-center">{{profile.profile_user.username}}</h3>
+                    {% endif %}
+                   
+                   {% if profile.bio %}
+                    <p class="text-center">
+                    {{profile.bio}}
+                        </p>
+                        {% else %}
+                        <p class="text-center">
+                            add somting
+                        </p> 
+                       
+                   {% endif %}
+                      
+                    
+                  
+                   
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="editprofile d-flex flex-column align-items-center ">
+                    <h3>Edit Profile</h3>
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label for="FormControlFile1">import photo</label>
+                            {{profileform.profile_img}}
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="FormControlname">full name </label>
+                            {{userform.first_name}}
+                        </div>
+                        
+                        
+                        
+                        
+                        <div class="form-group">
+                        <label for="FormControlbio">edit bio</label>
+                        {{profileform.bio}}
+                        </div>
+
+    
+                        <div class="form-group">
+                            <input 
+                            type="submit" 
+                            class="btn btn-primary btn-lg btn-block" 
+                            value="save"
+                            >
+                        </div>
+                    </form>
+
+                    
+                </div>
+            </div>
+        </div>
+        
+        
+    
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 	
+
+</body>
+{% endblock content %}

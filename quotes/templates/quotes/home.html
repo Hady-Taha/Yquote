@@ -1,0 +1,179 @@
+{% extends 'quotes/index.html' %}
+{% load static %}
+{% block content %}
+
+  
+
+<body class="MineBackground">
+
+<!---------header----------->
+<header class="head ">  
+  <nav class="navbar navbar-expand-lg head-nav">
+   
+    <h4><a href="{% url 'website' %}" class="nav-link p-0">Yquote</a></h4>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="fas fa-bars " style="color: #fff;"></span>
+    </button>
+      
+      <div class="collapse navbar-collapse justify-content-between " id="navbarNavDropdown">
+    
+          <ul class="navbar-nav ml-auto">
+          
+              <li class="nav-item dropdown  ">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{user.username}}
+                    {% if user.profile.verify == True %}
+                      <img src="{% static 'quotes/image/verf.png' %} " width="20" height="20">
+                    {% endif %}
+                  </a>
+                  <div class="dropdown-menu head-dropdown-register " aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{% url 'profile' user.id %}">
+                    <img src=" {{user.profile.profile_img.url}}" class="rounded-circle" width="20" height="20">
+                    {{user.username}}
+                    {% if user.profile.verify == True %}
+                      <img src="{% static 'quotes/image/verf.png' %} " width="20" height="20">
+                    {% endif %}
+                    </a>
+                    <a class="dropdown-item" href="{% url 'logout' %} ">
+                    <i class="fas fa-sign-out-alt" style="font-size: 20px"></i>
+                    Logout
+                    </a>
+                  </div>
+              </li>
+
+
+              <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'website' %}">Home</a>
+                </li>
+          </ul>
+      </div>
+  </nav>
+
+</header>
+<!---------header----------->
+
+
+
+<div class="container ">
+    <div class="row " >
+        
+        
+      
+
+        <div class="col-md-3 mt-5 ">
+            <h3 class="text-center">Pepole here 🙌</h3>
+            <div class="Pepole-in-home d-flex flex-column">
+                {% for profile in profiles %}
+                <a href="{% url 'profile' profile.profile_user.id %}">
+                  <h6 class="d-inline-block m-1 p-1">
+                    <img src="{{profile.profile_img.url}}" class="rounded-circle " width="20" height="20">   
+                    {{profile.profile_user.username}}
+                    {% if profile.verify == True %}
+                      <img src="{% static 'quotes/image/verf.png' %} " width="20" height="20">
+                    {% endif %}
+                  </h6>
+                </a>
+                {% endfor %}
+
+
+            </div>
+        </div>
+        
+
+
+        <div class="col-md-8 mt-5">
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-{{message.tags}} d-flex justify-content-center" role="alert">
+            {{message}}
+          </div>
+          {% endfor %}
+          {% endif %}
+           <h2 class="text-center"><span style="color: orange">Q</span>uotes</h2>
+            
+           
+           <div class=" form-for-add-post  mb-3">
+                <div class=" d-flex flex-row justify-content-center ">
+               <img src="{{user.profile.profile_img.url}}" width="50" height="50" class="rounded-circle m-2">
+                <form method="POST" class="w-100 mt-3">
+                  {% csrf_token %}
+                  {{form.qoute}}
+                  {{form.errors}}
+                  <button class="btn rounded-pill btn-success mt-2 float-right "> 
+                    Post
+                    <i class="far fa-paper-plane"></i>
+                  </button>
+                </form>
+                </div>
+            </div>
+           
+           
+           
+           {% for quote in quotes %}
+             
+           
+           
+          
+              <div class="Quotes-in-home">
+                {% if user.first_name %}
+                  <h6>
+                    <img src="{{quote.userp.profile_img.url}}" class="rounded-circle " width="30" height="30"> 
+                    {{quote.userp.profile_user.first_name}}
+                    {% if quote.userp.verify == True %}
+                      <img src="{% static 'quotes/image/verf.png' %} " width="20" height="20">
+                    {% endif %}
+                    <small>{{quote.userp.profile_user.username}}</small>
+                  </h6>
+                       
+                  {% else %}
+                
+                  <h6>
+                    <img src="{{quote.userp.profile_img.url}}" class="rounded-circle " width="30" height="30">  
+                    {{quote.userp.profile_user.username}}
+                    {% if quote.userp.verify == True %}
+                      <img src="{% static 'quotes/image/verf.png' %} " width="20" height="20">
+                    {% endif %}
+                </h6>
+                  {% endif %}
+                
+                
+                <p style="font-size: 25px;">
+                  {{quote.qoute}}
+                </p>
+                    
+                    {% if quote.userp.profile_user.username == user.username%}
+                      <div class="d-flex">
+                      <form method="POST" action="{% url 'delete' quote.id %} ">
+                        {% csrf_token %}
+                      <button class="btn btn-sm btn-danger"> Delete</button>
+                      </form>
+                      </div>
+                    {% endif %}
+                      
+                    
+              </div>
+              
+                
+              
+
+          {% endfor %}
+
+         
+         <div class="col-md-2">
+            <div class="Profile-in-home">
+             
+            </div>
+        </div>
+   
+
+
+
+    </div>
+
+   
+  </div>
+
+</body>
+
+{% endblock content %}

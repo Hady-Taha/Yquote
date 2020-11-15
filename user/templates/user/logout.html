@@ -1,0 +1,31 @@
+{% extends 'quotes/index.html' %}
+{% block content %}
+<body class="NoneHomePage">
+    
+    <header class="head text-center">
+        
+        <h1 class="text-center d-inline "><a href="{% url 'home' %} " style="text-decoration: none; color: #fff;" >Yqoute</a></h1>
+    </header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex flex-column align-items-center logoutc">
+                    <h1 class="text-light">See You agine 👋</h1>
+                    <a href="{% url 'login' %} " class="btn btn-primary m-2" style="text-decoration: none; color: #fff;">Login</a>
+                    <p class="text-light">Hady Taha&copy;</p>
+                    
+                </div>
+            </div>
+        </div>
+       
+    </div>
+
+
+
+
+ 	
+
+</body>
+{% endblock content %}
